@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <style>
+        h4 {
+          background-color: grey;
+          color: white;
+          font-style: normal;
+          padding: 4px;
+          text-align: left;
+        }
+        </style>
+    </head>
+    
+<h4>Agregar usuario</h4>
+<code># adduser lean</code>
+
+<h4>Instalamos y habilitamos sudo</h4>
+<code>
+    # apt install sudo<br>
+    # /sbin/usermod -a -G sudo,adm lean<br>
+    # /sbin/visudo (y agregar el NOPASSWD:ALL)<br>
+    %sudo   ALL=(ALL:ALL) NOPASSWD:ALL<br>
+</code>
+
+<h4>Asignar IP fija</h4>
+<code>
+    $ sudo vi /etc/network/interfaces<br>
+    <br>
+    auto lo eth0<br>
+    <br>
+    iface eth0 inet static<br>
+        address 192.168.1.10<br>
+        netmask 255.255.255.0<br>
+        network 192.168.1.0<br>
+        broadcast 192.168.1.255<br>
+        gateway 192.168.1.1<br>
+        dns-nameservers 192.168.1.1 192.168.1.2<br>
+        # version vieja: up route add -net 192.168.100.0 netmask 255.255.255.0 gw 192.168.133.2<br>
+        # version nueva: post-up ip route add 10.0.8.0/24 via 192.168.133.253<br>
+</code>
+
+<h4>MOTD (/etc/motd)</h4>
+<code>
+    http://patorjk.com/software/taag/#p=display&f=doh&t=nodo1<br>
+    (Fuentes: big, blocks, doh)
+</code>
+
+<h4>Instalamos algunas herramientas</h4>
+<code>
+    $ sudo apt install bzip2 less tmux vim psmisc htop apticron<br>
+    $ sudo apt install build-essential linux-headers-`uname -r`<br>
+    $ sudo apt install dnsutils<br>
+</code>
+
+</html>
+
